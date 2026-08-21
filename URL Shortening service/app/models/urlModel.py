@@ -1,0 +1,9 @@
+from ..database import Base
+from sqlalchemy import Column, Integer, String, Boolean, text, DateTime, func
+class URLs(Base):
+    __tablename__ = "urls"
+    short_url = Column(String, primary_key=True, nullable=False)
+    long_url = Column(String, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    expiry_time = Column(DateTime(timezone=True), nullable=True)
+    click_count = Column(Integer, server_default=text("0"), nullable=False)
