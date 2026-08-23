@@ -1,6 +1,6 @@
 from ..database import Base
-from sqlalchemy import Column, Integer, String, Boolean, text, DateTime, func, Sequence
-class URLs(Base):
+from sqlalchemy import Column, Integer, String, text, DateTime, func, Sequence
+class URL(Base):
     __tablename__ = "urls"
     short_url = Column(String, primary_key=True, nullable=False)
     long_url = Column(String, nullable=False)
