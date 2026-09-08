@@ -27,7 +27,8 @@ def upgrade() -> None:
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.Column('expiry_time', sa.DateTime(timezone=True), nullable=True),
     sa.Column('click_count', sa.Integer(), server_default=sa.text('0'), nullable=False),
-    sa.PrimaryKeyConstraint('short_url')
+    sa.PrimaryKeyConstraint('short_url'),
+    sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id', ondelete="cascade"), nullable=False)
     )
     # ### end Alembic commands ###
 

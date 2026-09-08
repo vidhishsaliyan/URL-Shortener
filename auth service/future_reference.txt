@@ -1,0 +1,52 @@
+Access & Refresh Token Design — Summary
+
+1. Access Token
+A short-lived JWT used to access protected API routes.
+Sent through the Authorization: Bearer <token> header.
+Contains user_id, login_id, token_type, and exp.
+Not stored in the database.
+user_id identifies the user, while login_id identifies the specific login session.
+On every protected request, the JWT signature and expiry are verified, the token type is checked, and the login_id is checked against the database.
+If the login_id is no longer in the database, the session has been revoked and the request is rejected.
+
+2. Refresh Token
+A long-lived JWT used to obtain a new access token.
+Stored in an HttpOnly cookie rather than being sent in the Authorization header.
+Contains user_id, login_id, token_type, exp, and a unique jti.
+The jti makes every refresh-token instance unique.
+The raw refresh token is never stored in the database; only its hash is stored.
+
+3. Login Session
+Every login generates a unique login_id using UUID.
+The same login_id is placed in both the access and refresh tokens.
+The database stores the login_id together with the hash of the currently valid refresh token.
+This allows multiple sessions for the same user and allows each session to be revoked independently.
+
+4. Refresh Process
+The refresh token is retrieved from the HttpOnly cookie.
+The JWT signature is verified and the payload is decoded without automatically rejecting it for expiry, so the expiration can be checked manually.
+The token_type is checked to ensure it is a refresh token.
+The login_id is extracted from the JWT and used to find the corresponding session in the database.
+If the login_id does not exist in the database, the session has been revoked and the refresh token is rejected.
+If the session exists, the actual refresh token received from the cookie is verified against the hashed refresh token stored in that session's database record.
+If the hash verification fails, the token is considered invalid and the session is revoked.
+The token's expiration is checked manually. If expired, the session is removed and the request is rejected.
+If everything is valid, the old refresh-token record is deleted and a new refresh token is generated.
+The new refresh token keeps the same expiration time, so the refresh-token lifetime is fixed rather than sliding.
+A new short-lived access token is generated and returned.
+
+5. Logout
+Logout uses the access token to obtain the login_id.
+The corresponding session is deleted from the database.
+The refresh-token cookie is deleted from the browser.
+Because the session no longer exists in the database, the old access token is also rejected even if its JWT has not expired.
+The old refresh token cannot be used because its database record has been removed.
+
+6. Overall Design
+Access token = authorization
+Refresh token = maintaining the login
+user_id = identity
+login_id = session
+jti = individual refresh-token instance
+Database session entry = server-side control over whether the login is still valid
+This gives you short-lived access tokens, secure refresh tokens, refresh-token rotation, per-session logout, and immediate session revocation.

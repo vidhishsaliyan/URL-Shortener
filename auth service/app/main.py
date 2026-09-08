@@ -1,11 +1,14 @@
 from fastapi import FastAPI
 from .routers import auth
-from .models import usersModel
+from .models import usersModel, authModel
 from .database import Base, engine
 from starlette.middleware.sessions import SessionMiddleware
 from .config import settings
+from .database import Base, engine
 
 app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     SessionMiddleware,
@@ -14,7 +17,7 @@ app.add_middleware(
     same_site="lax"
 )
 
-@app.get('/')
+@app.get('/api/auth')
 def index():
     return {"message": "auth service is running"}
 

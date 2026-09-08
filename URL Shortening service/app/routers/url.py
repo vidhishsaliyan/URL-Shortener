@@ -4,7 +4,6 @@ from ..schemas import urlSchema
 from ..models import urlModel
 from ..database import get_db
 from sqlalchemy.orm import Session
-import sqlalchemy
 router = APIRouter(prefix="/api/urls", tags=["URL"])
 
 ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -31,7 +30,7 @@ async def create_short_url(request : urlSchema.RequestURL, db: Session = Depends
     SPACE = 62**6
     value = (value*26860463)%SPACE
     short_url = base62_encode(value)
-    new_entry = urlModel.URL(long_url=request.long_url, short_url=str(short_url), expiry_time=expiry_time)
+    new_entry = urlModel.URL(long_url=request.long_url, short_url=str(short_url), expiry_time=expiry_time, user_id=1)
     db.add(new_entry)
     db.commit()
     db.refresh(new_entry)
