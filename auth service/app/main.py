@@ -21,5 +21,4 @@ app.add_middleware(
 def index():
     return {"message": "auth service is running"}
 
-Base.metadata.create_all(bind=engine)
 app.include_router(router=auth.router)
