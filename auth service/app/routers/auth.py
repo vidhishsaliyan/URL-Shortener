@@ -59,6 +59,7 @@ def delete_user_login(response:Response, db:Session=Depends(get_db), login_id:st
     return {"message": "Logged out successfully"}
 
 
-@router.get('/test')
-def test_route(user: userSchemas.UserDataOut = Depends(authUtils.get_current_user)):
-    return user
+@router.get('/auth_check')
+def test_route(response:  Response, user: userSchemas.UserDataOut = Depends(authUtils.get_current_user)):
+    response.headers['X-User-ID'] = str(user.user_id)
+    return {'message' : 'Authentication valid'}

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends, Response, status
+from fastapi import APIRouter, HTTPException, Depends, Response, status, Request
 from datetime import datetime, timezone, timedelta
 from ..schemas import urlSchema
 from ..models import urlModel
@@ -19,7 +19,7 @@ def base62_encode(number):
 
 
 @router.post('/shorten', status_code=status.HTTP_201_CREATED)
-async def create_short_url(request : urlSchema.RequestURL, db: Session = Depends(get_db)):
+async def create_short_url(request: Request, request_body : urlSchema.RequestURL, db: Session = Depends(get_db)):
     expiry_minutes = 30
     expiry_time = datetime.now(timezone.utc) + timedelta(minutes=expiry_minutes)
     try:
@@ -30,7 +30,8 @@ async def create_short_url(request : urlSchema.RequestURL, db: Session = Depends
     SPACE = 62**6
     value = (value*26860463)%SPACE
     short_url = base62_encode(value)
-    new_entry = urlModel.URL(long_url=request.long_url, short_url=str(short_url), expiry_time=expiry_time, user_id=1)
+    user_id_header = request.headers.get("X-User-ID")
+    new_entry = urlModel.URL(long_url=request_body.long_url, short_url=str(short_url), expiry_time=expiry_time, user_id=user_id_header)
     db.add(new_entry)
     db.commit()
     db.refresh(new_entry)
