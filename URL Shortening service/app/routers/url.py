@@ -5,7 +5,7 @@ from ..models import urlModel
 from ..database import get_db
 from sqlalchemy.orm import Session
 from ..utils.shorten_utils import is_url_reachable
-router = APIRouter(prefix="/api/urls", tags=["URL"])
+router = APIRouter(prefix="/api/urls", tags=["URL Shortening"])
 
 ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
