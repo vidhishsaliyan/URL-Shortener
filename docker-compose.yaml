@@ -1,0 +1,44 @@
+services:
+  auth:
+    build:
+      context: .
+      dockerfile: "./auth service/Dockerfile"
+    image: auth-service  
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    
+  redirection:
+    build:
+      context: .
+      dockerfile: "./URL Redirection Service/Dockerfile"
+    image: redirection-service
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./.env
+
+  shortening:
+    build:
+      context: .
+      dockerfile: "./URL Shortening Service/Dockerfile"
+    image: shortening-service
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./.env
+
+  postgres:
+    image: postgres:16
+    ports:
+      -"5432:5432"
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      -postgres_volume:/var/lib/postgresql/data     #this is to mount the docker volume to the container
+    
+volumes:
+  postgres_volume:                                  #this is to define the docker volume
