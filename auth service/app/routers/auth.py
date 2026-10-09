@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from ..models import usersModel, authModel
 from ..utils import authUtils
+from ..config import settings
 from jose import jwt, JWTError
 
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
@@ -15,7 +16,7 @@ router = APIRouter(prefix="/api/auth", tags=["Authentication"])
 
 @router.get("/google/login", name="login")
 async def user_login(request: Request):
-    redirect_uri = request.url_for("google_callback")
+    redirect_uri = settings.google_redirect_uri
     return await oauth.google.authorize_redirect(request, redirect_uri, prompt="select_account")
 
 @router.get("/google/callback", name="google_callback")
