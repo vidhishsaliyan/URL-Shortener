@@ -17,6 +17,9 @@ def base62_encode(number):
 
     return result.zfill(6)
 
+@router.get('/test')
+def test():
+    return {'message': 'Shortening service working'}
 
 @router.post('/shorten', status_code=status.HTTP_201_CREATED)
 async def create_short_url(request: Request, request_body : urlSchema.RequestURL, db: Session = Depends(get_db)):
@@ -37,3 +40,4 @@ async def create_short_url(request: Request, request_body : urlSchema.RequestURL
     db.commit()
     db.refresh(new_entry)
     return new_entry
+

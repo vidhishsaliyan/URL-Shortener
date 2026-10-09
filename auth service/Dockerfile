@@ -6,7 +6,7 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY "auth service" ./
+COPY ["auth service", "./"]
 
 EXPOSE 8000
 

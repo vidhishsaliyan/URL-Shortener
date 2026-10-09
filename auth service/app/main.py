@@ -17,7 +17,7 @@ app.add_middleware(
     same_site="lax"
 )
 
-@app.get('/api/auth')
+@app.get('/api/auth/health')
 def index():
     return {"message": "auth service is running"}
 

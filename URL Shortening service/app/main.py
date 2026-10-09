@@ -5,7 +5,7 @@ from .database import Base, engine
 app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
-@app.get('/api/urls/')
+@app.get('/api/urls/health')
 def index():
     return {"message": "URL shortening service is running"}
 
