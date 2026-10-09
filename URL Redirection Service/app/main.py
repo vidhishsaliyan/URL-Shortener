@@ -18,7 +18,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-@app.get('/api/redirection/health')
+@app.get('/health')
 def index():
     return {'message':'redirection service is running'}
 

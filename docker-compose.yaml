@@ -9,8 +9,8 @@ services:
     env_file:
       - ./.env
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/auth/health')"]
-      interval: 5s
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
@@ -28,8 +28,8 @@ services:
     env_file:
       - ./.env
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/api/redirection/health')"]
-      interval: 5s
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/health')"]
+      interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
@@ -51,8 +51,8 @@ services:
     env_file:
       - ./.env
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/api/urls/health')"]
-      interval: 5s
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8001/health')"]
+      interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
@@ -73,7 +73,7 @@ services:
       - postgres_volume:/var/lib/postgresql/data     #this is to mount the docker volume to the container
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U ${DATABASE_USERNAME} -d ${DATABASE_NAME}"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
       retries: 10
       start_period: 15s
@@ -88,7 +88,7 @@ services:
       - url_redis_volume:/data
     healthcheck:
       test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
@@ -103,7 +103,7 @@ services:
       - clicks_redis_volume:/data
     healthcheck:
       test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
