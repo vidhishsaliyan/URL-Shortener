@@ -1,0 +1,81 @@
+--------------------------------------WITHOUT REDIS--------------------------------------
+
+  █ THRESHOLDS
+
+    checks
+    ✓ 'rate>=0.99' rate=100.00%
+
+    http_req_failed
+    ✓ 'rate<=0.1' rate=0.00%
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 3584    59.53951/s
+    checks_succeeded...: 100.00% 3584 out of 3584
+    checks_failed......: 0.00%   0 out of 3584
+
+    ✓ redirect 307 or not
+
+    HTTP
+    http_req_duration..............: avg=234.73ms min=4.09ms   med=198.45ms max=729.25ms p(90)=498.92ms p(95)=537.4ms
+      { expected_response:true }...: avg=234.73ms min=4.09ms   med=198.45ms max=729.25ms p(90)=498.92ms p(95)=537.4ms
+    http_req_failed................: 0.00%  0 out of 3584
+    http_reqs......................: 3584   59.53951/s
+
+    EXECUTION
+    iteration_duration.............: avg=335.58ms min=105.17ms med=298.73ms max=829.54ms p(90)=599.39ms p(95)=638.03ms
+    iterations.....................: 3584   59.53951/s
+    vus............................: 20     min=20        max=20
+    vus_max........................: 20     min=20        max=20
+
+    NETWORK
+    data_received..................: 629 kB 10 kB/s
+    data_sent......................: 265 kB 4.4 kB/s
+
+
+running (1m00.2s), 00/20 VUs, 3584 complete and 0 interrupted iterations
+default ✓ [======================================] 20 VUs  1m0s
+
+
+
+
+
+--------------------------------------WITH REDIS--------------------------------------
+
+  █ THRESHOLDS
+
+    checks
+    ✓ 'rate>=0.99' rate=100.00%
+
+    http_req_failed
+    ✓ 'rate<=0.1' rate=0.00%
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 11007   183.134754/s
+    checks_succeeded...: 100.00% 11007 out of 11007
+    checks_failed......: 0.00%   0 out of 11007
+
+    ✓ redirect 307 or not
+
+    HTTP
+    http_req_duration..............: avg=8.26ms  min=2.62ms   med=7.11ms   max=65.54ms  p(90)=12.22ms  p(95)=15.89ms
+      { expected_response:true }...: avg=8.26ms  min=2.62ms   med=7.11ms   max=65.54ms  p(90)=12.22ms  p(95)=15.89ms
+    http_req_failed................: 0.00%  0 out of 11007
+    http_reqs......................: 11007  183.134754/s
+
+    EXECUTION
+    iteration_duration.............: avg=109.1ms min=103.16ms med=107.85ms max=195.64ms p(90)=113.24ms p(95)=117.11ms
+    iterations.....................: 11007  183.134754/s
+    vus............................: 20     min=20         max=20
+    vus_max........................: 20     min=20         max=20
+
+    NETWORK
+    data_received..................: 1.9 MB 32 kB/s
+    data_sent......................: 815 kB 14 kB/s
+
+
+running (1m00.1s), 00/20 VUs, 11007 complete and 0 interrupted iterations
+default ✓ [======================================] 20 VUs  1m0s

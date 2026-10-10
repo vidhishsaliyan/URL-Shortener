@@ -36,10 +36,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      url-redis:
-        condition: service_healthy
-      clicks-redis:
-        condition: service_healthy
 
   shortening:
     build:

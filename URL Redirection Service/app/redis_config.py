@@ -5,11 +5,15 @@ redis_password = os.getenv("REDIS_PASSWORD")
 url_redis = Redis(host="url-redis", 
                   port=6379, 
                   password=redis_password,
+                  socket_connect_timeout=0.3,
+                  socket_timeout=0.3,
                   decode_responses=True)
 
 clicks_redis = Redis(host="clicks-redis",
                      port=6379,
                      password=redis_password,
+                     socket_connect_timeout=0.3,
+                     socket_timeout=0.3,
                      decode_responses=True)
 
 
