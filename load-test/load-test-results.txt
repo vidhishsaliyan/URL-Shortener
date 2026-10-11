@@ -1,6 +1,6 @@
 --------------------------------------WITHOUT REDIS--------------------------------------
 
-  █ THRESHOLDS
+    █ THRESHOLDS
 
     checks
     ✓ 'rate>=0.99' rate=100.00%
@@ -11,31 +11,33 @@
 
   █ TOTAL RESULTS
 
-    checks_total.......: 3584    59.53951/s
-    checks_succeeded...: 100.00% 3584 out of 3584
-    checks_failed......: 0.00%   0 out of 3584
+    checks_total.......: 3932    64.812935/s
+    checks_succeeded...: 100.00% 3932 out of 3932
+    checks_failed......: 0.00%   0 out of 3932
 
     ✓ redirect 307 or not
 
     HTTP
-    http_req_duration..............: avg=234.73ms min=4.09ms   med=198.45ms max=729.25ms p(90)=498.92ms p(95)=537.4ms
-      { expected_response:true }...: avg=234.73ms min=4.09ms   med=198.45ms max=729.25ms p(90)=498.92ms p(95)=537.4ms
-    http_req_failed................: 0.00%  0 out of 3584
-    http_reqs......................: 3584   59.53951/s
+    http_req_duration..............: avg=359.92ms min=5.65ms   med=448.63ms max=853.41ms p(90)=631.15ms p(95)=698.83ms
+      { expected_response:true }...: avg=359.92ms min=5.65ms   med=448.63ms max=853.41ms p(90)=631.15ms p(95)=698.83ms
+    http_req_failed................: 0.00%  0 out of 3932
+    http_reqs......................: 3932   64.812935/s
 
     EXECUTION
-    iteration_duration.............: avg=335.58ms min=105.17ms med=298.73ms max=829.54ms p(90)=599.39ms p(95)=638.03ms
-    iterations.....................: 3584   59.53951/s
-    vus............................: 20     min=20        max=20
-    vus_max........................: 20     min=20        max=20
+    iteration_duration.............: avg=461.21ms min=106.29ms med=550.05ms max=974.28ms p(90)=732.41ms p(95)=800.15ms
+    iterations.....................: 3932   64.812935/s
+    vus............................: 30     min=30        max=30
+    vus_max........................: 30     min=30        max=30
 
     NETWORK
-    data_received..................: 629 kB 10 kB/s
-    data_sent......................: 265 kB 4.4 kB/s
+    data_received..................: 689 kB 11 kB/s
+    data_sent......................: 291 kB 4.8 kB/s
 
 
-running (1m00.2s), 00/20 VUs, 3584 complete and 0 interrupted iterations
-default ✓ [======================================] 20 VUs  1m0s
+
+
+running (1m00.7s), 00/30 VUs, 3932 complete and 0 interrupted iterations
+default ✓ [======================================] 30 VUs  1m0s
 
 
 
@@ -43,6 +45,50 @@ default ✓ [======================================] 20 VUs  1m0s
 
 --------------------------------------WITH REDIS--------------------------------------
 
+█ THRESHOLDS
+
+    checks
+    ✓ 'rate>=0.99' rate=100.00%
+
+    http_req_failed
+    ✓ 'rate<=0.1' rate=0.00%
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 12867   213.869287/s
+    checks_succeeded...: 100.00% 12867 out of 12867
+    checks_failed......: 0.00%   0 out of 12867
+
+    ✓ redirect 307 or not
+
+    HTTP
+    http_req_duration..............: avg=38.25ms  min=4.73ms  med=31.88ms  max=237.31ms p(90)=69.35ms  p(95)=88.43ms
+      { expected_response:true }...: avg=38.25ms  min=4.73ms  med=31.88ms  max=237.31ms p(90)=69.35ms  p(95)=88.43ms
+    http_req_failed................: 0.00%  0 out of 12867
+    http_reqs......................: 12867  213.869287/s
+
+    EXECUTION
+    iteration_duration.............: avg=140.09ms min=105.1ms med=133.77ms max=364.5ms  p(90)=171.25ms p(95)=190.46ms
+    iterations.....................: 12867  213.869287/s
+    vus............................: 30     min=30         max=30
+    vus_max........................: 30     min=30         max=30
+
+    NETWORK
+    data_received..................: 2.3 MB 38 kB/s
+    data_sent......................: 952 kB 16 kB/s
+
+
+
+
+running (1m00.2s), 00/30 VUs, 12867 complete and 0 interrupted iterations
+default ✓ [======================================] 30 VUs  1m0s
+
+
+
+--------------------------------------WITH REDIS AND LOAD BALANCING (3 instances)--------------------------------------
+
+
   █ THRESHOLDS
 
     checks
@@ -54,28 +100,30 @@ default ✓ [======================================] 20 VUs  1m0s
 
   █ TOTAL RESULTS
 
-    checks_total.......: 11007   183.134754/s
-    checks_succeeded...: 100.00% 11007 out of 11007
-    checks_failed......: 0.00%   0 out of 11007
+    checks_total.......: 14998   249.507062/s
+    checks_succeeded...: 100.00% 14998 out of 14998
+    checks_failed......: 0.00%   0 out of 14998
 
     ✓ redirect 307 or not
 
     HTTP
-    http_req_duration..............: avg=8.26ms  min=2.62ms   med=7.11ms   max=65.54ms  p(90)=12.22ms  p(95)=15.89ms
-      { expected_response:true }...: avg=8.26ms  min=2.62ms   med=7.11ms   max=65.54ms  p(90)=12.22ms  p(95)=15.89ms
-    http_req_failed................: 0.00%  0 out of 11007
-    http_reqs......................: 11007  183.134754/s
+    http_req_duration..............: avg=18.58ms  min=4.53ms   med=14.71ms  max=134.97ms p(90)=33.19ms  p(95)=43.4ms
+      { expected_response:true }...: avg=18.58ms  min=4.53ms   med=14.71ms  max=134.97ms p(90)=33.19ms  p(95)=43.4ms
+    http_req_failed................: 0.00%  0 out of 14998
+    http_reqs......................: 14998  249.507062/s
 
     EXECUTION
-    iteration_duration.............: avg=109.1ms min=103.16ms med=107.85ms max=195.64ms p(90)=113.24ms p(95)=117.11ms
-    iterations.....................: 11007  183.134754/s
-    vus............................: 20     min=20         max=20
-    vus_max........................: 20     min=20         max=20
+    iteration_duration.............: avg=120.08ms min=105.19ms med=116.22ms max=258.09ms p(90)=135.12ms p(95)=144.74ms
+    iterations.....................: 14998  249.507062/s
+    vus............................: 30     min=30         max=30
+    vus_max........................: 30     min=30         max=30
 
     NETWORK
-    data_received..................: 1.9 MB 32 kB/s
-    data_sent......................: 815 kB 14 kB/s
+    data_received..................: 2.6 MB 44 kB/s
+    data_sent......................: 1.1 MB 19 kB/s
 
 
-running (1m00.1s), 00/20 VUs, 11007 complete and 0 interrupted iterations
-default ✓ [======================================] 20 VUs  1m0s
+
+
+running (1m00.1s), 00/30 VUs, 14998 complete and 0 interrupted iterations
+default ✓ [======================================] 30 VUs  1m0s
